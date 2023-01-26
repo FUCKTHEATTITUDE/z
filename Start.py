@@ -51,10 +51,10 @@ options.add_argument("--use-fake-device-for-media-stream")
 options.add_argument("--start-maximized")
 
 count = 0
-number = (int(config['ZOOM']['Member_Count']))
-meet_code = config['ZOOM']['Meeting_ID']
-passcode = config['ZOOM']['Meeting_Pass']
-sec = config['ZOOM']['Member_Hold_Time']
+number = 2
+meet_code = '3069823402'
+passcode = 'WARP1d'
+sec = 100
 
 
 
