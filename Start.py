@@ -68,9 +68,10 @@ with open("name.txt", 'r') as f:
 n = 0
 def fun(n, count):
     p = PROXY[count]
-    options.add_argument(f"--proxy-server={p}")
-    driver = webdriver.Chrome(service=Service(
-        ChromeDriverManager().install()), options=options)
+    if p is not None:
+        options.add_argument(f"--proxy-server={p}")
+    driver = webdriver.Chrome('chromedriver', options=options)
+    return driver
 
     
     driver.get(f'https://zoom.us/wc/join/{meet_code}')
