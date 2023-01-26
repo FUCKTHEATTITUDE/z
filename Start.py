@@ -57,6 +57,8 @@ passcode = config['ZOOM']['Meeting_Pass']
 sec = config['ZOOM']['Member_Hold_Time']
 
 
+
+
 lis = []
 with open("name.txt", 'r') as f:
     for i in range(51000):
@@ -71,21 +73,21 @@ def fun(n, count):
         ChromeDriverManager().install()), options=options)
 
     
-    driver.get(f'https://dulink.in/r1uux')
+    driver.get(f'https://zoom.us/wc/join/{meet_code}')
 
     wait = WebDriverWait(driver, 25)
 
-    wait.until(EC.presence_of_element_located((By.ID, "btn3")))
+    wait.until(EC.presence_of_element_located((By.ID, "inputname")))
     
-    inp = driver.find_element(by='id', value='btn3')
+    inp = driver.find_element(by='id', value='inputname')
 
     
     inp.send_keys(f"{lis[n]}")
-    time.sleep(15)
+    time.sleep(1)
 
     wait = WebDriverWait(driver, 25)
-    wait.until(EC.presence_of_element_located((By.ID, "btn3")))
-    btn2 = driver.find_element(by='id', value='closeButton()')
+    wait.until(EC.presence_of_element_located((By.ID, "joinBtn")))
+    btn2 = driver.find_element(by='id', value='joinBtn')
     
 
     try:
@@ -103,14 +105,14 @@ def fun(n, count):
         pass
 
     wait = WebDriverWait(driver, 25)
-    wait.until(EC.presence_of_element_located((By.ID, "btn6")))
-    inp2 = driver.find_element(by='id', value='btn6')
-    # time.sleep(18)
+    wait.until(EC.presence_of_element_located((By.ID, "inputpasscode")))
+    inp2 = driver.find_element(by='id', value='inputpasscode')
+    # time.sleep(1)
     wait = WebDriverWait(driver, 25)
     inp2.send_keys(passcode)
-    wait.until(EC.presence_of_element_located((By.ID, "btn6")))
-    btn3 = driver.find_element(by='id', value='btn6')
-   # time.sleep(19)
+    wait.until(EC.presence_of_element_located((By.ID, "joinBtn")))
+    btn3 = driver.find_element(by='id', value='joinBtn')
+   # time.sleep(1)
     btn3.click()
     print(Style.BRIGHT + Fore.YELLOW +
           f"{lis[n]}{Style. RESET_ALL}{Style.BRIGHT+Fore.GREEN}Join Done\n")
