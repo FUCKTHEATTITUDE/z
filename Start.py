@@ -73,65 +73,25 @@ def fun(n, count):
     driver = webdriver.Chrome('chromedriver', options=options)
     return driver
 
+def driver_wait(driver, locator, by, secs=1, condition=ec.element_to_be_clickable):
+    wait = WebDriverWait(driver=driver, timeout=secs)
+    element = wait.until(condition((by, locator)))
+    return element
     
     driver.get(f'https://zoom.us/wc/join/{meet_code}')
-
-    wait = WebDriverWait(driver, 25)
-
-    wait.until(EC.presence_of_element_located((By.ID, "inputname")))
-    
-    inp = driver.find_element(by='id', value='inputname')
-
-    
-    inp.send_keys(f"{lis[n]}")
+    time.sleep(3)
+    inp = driver.find_element(By.ID, 'inputname')
     time.sleep(1)
-
-    wait = WebDriverWait(driver, 25)
-    wait.until(EC.presence_of_element_located((By.ID, "joinBtn")))
-    btn2 = driver.find_element(by='id', value='joinBtn')
-    
-
-    try:
-        elem = driver.find_element(
-            by='id', value='onetrust-accept-btn-handler')
-        elem.click()
-        time.sleep(1)
-    except NoSuchElementException:
-        pass
-
-    try:
-        elem = driver.find_element(by='id', value='wc_agree1')
-        elem.click()
-    except NoSuchElementException:
-        pass
-
-    wait = WebDriverWait(driver, 25)
-    wait.until(EC.presence_of_element_located((By.ID, "inputpasscode")))
-    inp2 = driver.find_element(by='id', value='inputpasscode')
-    # time.sleep(1)
-    wait = WebDriverWait(driver, 25)
+    inp.send_keys(f"{user}")
+    btn2 = driver.find_element(By.ID, 'joinBtn')
+    btn2.click()
+    time.sleep(2)
+    inp2 = driver.find_element(By.ID, 'inputpasscode')
+    time.sleep(1)
     inp2.send_keys(passcode)
-    wait.until(EC.presence_of_element_located((By.ID, "joinBtn")))
-    btn3 = driver.find_element(by='id', value='joinBtn')
-   # time.sleep(1)
-    btn3.click()
-    print(Style.BRIGHT + Fore.YELLOW +
-          f"{lis[n]}{Style. RESET_ALL}{Style.BRIGHT+Fore.GREEN}Join Done\n")
+    btn3 = driver.find_element(By.ID, 'joinBtn')
     time.sleep(1)
-    element = WebDriverWait(driver, 30).until(
-        EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/div/div[3]/div/div[1]/div/div[5]/div/div[2]/div/div/div[1]/div/div")))
-
-    element.click()
-    element = WebDriverWait(driver, 30).until(
-        EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[2]/div/div[3]/div/div[1]/div/div[5]/div/div[2]/div/div/div[1]/div[1]/div/div[3]/button")))
-
-    element.click()
-
-    element = WebDriverWait(driver, 50).until(EC.presence_of_element_located(
-        (By.ID, "multi-view-video")))
-    driver.execute_script(
-        "arguments[0].style.visibility='hidden'", element)
-    print("hide video")
+    btn3.click()
 
     count += 1
     if count == 30:
