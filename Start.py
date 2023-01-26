@@ -1,4 +1,4 @@
-import os
+import sys
 import subprocess
 from importlib.resources import path
 import threading
